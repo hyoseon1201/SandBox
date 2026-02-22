@@ -7,6 +7,9 @@
 #include "BaseCharacter.generated.h"
 
 class UStaticMeshComponent;
+class UCombatComponent;
+class ABaseProjectile;
+class UProjectileData;
 
 UCLASS()
 class SANDBOX_API ABaseCharacter : public ACharacter
@@ -24,9 +27,18 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* WeaponMesh;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	UCombatComponent* CombatComponent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Combat|Default")
+	TSubclassOf<ABaseProjectile> DefaultProjectileClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Combat|Default")
+	UProjectileData* DefaultProjectileData;
 public:	
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void FireWeapon();
 };

@@ -7,6 +7,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "Engine/LocalPlayer.h"
 #include "GameFramework/Character.h"
+#include "Character/BaseCharacter.h"
 
 void AMyPlayerController::BeginPlay()
 {
@@ -31,6 +32,7 @@ void AMyPlayerController::SetupInputComponent()
         EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMyPlayerController::Move);
         EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AMyPlayerController::Jump);
         EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMyPlayerController::Look);
+        EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &AMyPlayerController::Fire);
     }
 }
 
@@ -73,5 +75,16 @@ void AMyPlayerController::Look(const FInputActionValue& Value)
         AddYawInput(LookAxisVector.X);
 
         AddPitchInput(-LookAxisVector.Y);
+    }
+}
+
+void AMyPlayerController::Fire(const FInputActionValue& Value)
+{
+    if (APawn* ControlledPawn = GetPawn())
+    {
+        if (ABaseCharacter* MyCharacter = Cast<ABaseCharacter>(ControlledPawn))
+        {
+            MyCharacter->FireWeapon();
+        }
     }
 }
