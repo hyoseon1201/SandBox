@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "UI/WidgetController/DebugMenuWidgetController.h"
@@ -22,7 +22,7 @@ void UDebugMenuWidgetController::ToggleDebugOption(EDebugOptionType OptionType, 
 					{
 						CombatComp->SetUseObjectPooling(bEnable);
 
-						UE_LOG(LogTemp, Warning, TEXT("¿ÀºêÁ§Æ® Ç®¸µ ¸ðµå : %s"), CombatComp->GetUseObjectPooling() ? TEXT("ON") : TEXT("OFF"));
+						UE_LOG(LogTemp, Warning, TEXT("ì˜¤ë¸Œì íŠ¸ í’€ë§ ëª¨ë“œ : %s"), CombatComp->GetUseObjectPooling() ? TEXT("ON") : TEXT("OFF"));
 					}
 				}
 			}

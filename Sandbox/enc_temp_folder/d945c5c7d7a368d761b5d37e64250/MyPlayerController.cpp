@@ -106,13 +106,11 @@ void AMyPlayerController::Look(const FInputActionValue& Value)
 
 void AMyPlayerController::Fire(const FInputActionValue& Value)
 {
-    if (bIsUIInputMode) return;
-
     if (APawn* ControlledPawn = GetPawn())
     {
         if (ABaseCharacter* MyCharacter = Cast<ABaseCharacter>(ControlledPawn))
         {
-            MyCharacter->PlayAttackMontage();
+            MyCharacter->FireWeapon();
         }
     }
 }

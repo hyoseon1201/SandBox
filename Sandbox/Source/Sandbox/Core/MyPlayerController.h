@@ -17,7 +17,10 @@ UCLASS()
 class SANDBOX_API AMyPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
+
+public:
+	void SetUIInputMode(bool bEnableUI);
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	UInputMappingContext* DefaultMappingContext;
@@ -34,6 +37,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	UInputAction* FireAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputAction* ChangeInputModeAction;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 MappingPriority = 0;
 
@@ -45,4 +51,8 @@ protected:
 	void Jump(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 	void Fire(const FInputActionValue& Value);
+	void ChangeInputMode(const FInputActionValue& Value);
+
+private:
+	bool bIsUIInputMode = false;
 };

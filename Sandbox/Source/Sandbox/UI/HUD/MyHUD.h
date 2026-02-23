@@ -6,8 +6,9 @@
 #include "GameFramework/HUD.h"
 #include "MyHUD.generated.h"
 
-class USandBoxUserWidget;
 class UDebugMenuWidgetController;
+class UOverlayUserWidget;
+class UOverlayUserWidgetController;
 
 /**
  * 
@@ -18,18 +19,25 @@ class SANDBOX_API AMyHUD : public AHUD
 	GENERATED_BODY()
 	
 public:
-	void InitDebugMenu();
+	void InitOverlay();
 
 protected:
+	virtual void BeginPlay() override;
+
 	UPROPERTY(EditDefaultsOnly, Category = "UI")
-	TSubclassOf<USandBoxUserWidget> DebugWidgetClass;
+	TSubclassOf<UOverlayUserWidget> OverlayWidgetClass;
+
+	UPROPERTY()
+	TObjectPtr<UOverlayUserWidget> OverlayWidget;
+
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	TSubclassOf<UOverlayUserWidgetController> OverlayControllerClass;
+
+	UPROPERTY()
+	TObjectPtr<UOverlayUserWidgetController> OverlayController;
 
 	UPROPERTY(EditDefaultsOnly, Category = "UI")
 	TSubclassOf<UDebugMenuWidgetController> DebugControllerClass;
-
-private:
-	UPROPERTY()
-	TObjectPtr<USandBoxUserWidget> DebugWidget;
 
 	UPROPERTY()
 	TObjectPtr<UDebugMenuWidgetController> DebugController;

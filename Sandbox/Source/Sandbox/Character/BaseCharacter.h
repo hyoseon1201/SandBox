@@ -22,6 +22,8 @@ public:
 
 	UCombatComponent* GetCombatComponent();
 
+	void PlayAttackMontage();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -32,11 +34,16 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	UCombatComponent* CombatComponent;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Combat|Default")
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	TSubclassOf<ABaseProjectile> DefaultProjectileClass;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Combat|Default")
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	UProjectileData* DefaultProjectileData;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	TObjectPtr<UAnimMontage> AttackMontage;
+
+	bool bIsAttacking = false;
 public:	
 
 	// Called to bind functionality to input
