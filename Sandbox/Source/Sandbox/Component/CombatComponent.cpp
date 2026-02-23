@@ -17,6 +17,16 @@ UCombatComponent::UCombatComponent()
 	// ...
 }
 
+void UCombatComponent::SetUseObjectPooling(bool useValue)
+{
+	bUseObjectPooling = useValue;
+}
+
+bool UCombatComponent::GetUseObjectPooling()
+{
+	return bUseObjectPooling;
+}
+
 
 // Called when the game starts
 void UCombatComponent::BeginPlay()

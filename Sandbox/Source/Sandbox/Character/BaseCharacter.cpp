@@ -23,6 +23,11 @@ ABaseCharacter::ABaseCharacter()
 	CombatComponent = CreateDefaultSubobject<UCombatComponent>(TEXT("CombatComponent"));
 }
 
+UCombatComponent* ABaseCharacter::GetCombatComponent()
+{
+	return CombatComponent;
+}
+
 // Called when the game starts or when spawned
 void ABaseCharacter::BeginPlay()
 {

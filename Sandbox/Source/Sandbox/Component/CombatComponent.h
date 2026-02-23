@@ -18,6 +18,9 @@ public:
 	// Sets default values for this component's properties
 	UCombatComponent();
 
+	void SetUseObjectPooling(bool useValue);
+	bool GetUseObjectPooling();
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

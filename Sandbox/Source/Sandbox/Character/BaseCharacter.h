@@ -20,6 +20,8 @@ public:
 	// Sets default values for this character's properties
 	ABaseCharacter();
 
+	UCombatComponent* GetCombatComponent();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
