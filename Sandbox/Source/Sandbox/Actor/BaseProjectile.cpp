@@ -8,6 +8,7 @@
 #include "Particles/ParticleSystemComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Data/ProjectileData.h"
+#include "Subsystem/ObjectPoolSubsystem.h"
 
 // Sets default values
 ABaseProjectile::ABaseProjectile()
@@ -80,6 +81,11 @@ void ABaseProjectile::DeactivateProjectile()
 
 	ProjectileMovementComponent->StopMovementImmediately();
 	CollisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	if (UObjectPoolSubsystem* PoolSubsystem = GetWorld()->GetSubsystem<UObjectPoolSubsystem>())
+	{
+		PoolSubsystem->ReturnToPool(this);
+	}
 }
 
 // Called every frame

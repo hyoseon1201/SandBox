@@ -9,12 +9,32 @@
 class ABaseProjectile;
 
 USTRUCT()
-struct FProjectilePoolArray
+struct FPoolStatInfo
 {
 	GENERATED_BODY()
 
 	UPROPERTY()
-	TArray<ABaseProjectile*> Pool;
+	FString ClassName;
+
+	UPROPERTY()
+	int32 ActiveCount = 0;
+
+	UPROPERTY()
+	int32 InactiveCount = 0;
+};
+
+USTRUCT()
+struct FProjectilePoolArray
+{
+	GENERATED_BODY()
+
+	// 1. 전체 관리용 (Deinitialize 시 메모리 해제용)
+	UPROPERTY()
+	TArray<ABaseProjectile*> AllProjectiles;
+
+	// 2. 비활성 객체 보관용 (O(1) 접근용 스택)
+	UPROPERTY()
+	TArray<ABaseProjectile*> InactivePool;
 };
 
 /**
@@ -30,6 +50,10 @@ public:
 	virtual void Deinitialize() override;
 
 	ABaseProjectile* GetProjectile(TSubclassOf<ABaseProjectile> ProjectileClass);
+
+	void ReturnToPool(ABaseProjectile* Projectile);
+
+	TArray<FPoolStatInfo> GetPoolStatistics() const;
 
 private:
 	UPROPERTY()
